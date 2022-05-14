@@ -1,6 +1,9 @@
 package com.devsuperior.dsmovie.entities;
 
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_movie")
@@ -13,6 +16,9 @@ public class Movie {
     private Integer count;
     private String image;
 
+    @OneToMany(mappedBy = "id.movie")
+    private Set<Score> scores = new HashSet<>();
+
     public Movie() {}
 
     public Movie(Long id, String title, Double score, Integer count, String image) {
@@ -22,7 +28,6 @@ public class Movie {
         this.count = count;
         this.image = image;
     }
-
     public Long getId() {
         return id;
     }
@@ -61,5 +66,13 @@ public class Movie {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 }
